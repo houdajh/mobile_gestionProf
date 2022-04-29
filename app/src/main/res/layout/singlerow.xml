@@ -39,17 +39,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="This is Demo Name"
+                        android:text="Demo"
                         android:textColor="#000"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/coursetext"
+                        android:id="@+id/departementtext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="This is Course Name"
+                        android:text="departement"
                         android:textColor="#000"
                         android:textSize="25sp" />
 
@@ -59,7 +59,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="This is Email Name"
+                        android:text="Email"
                         android:textColor="#000"
                         android:textSize="25sp" />
                 </androidx.appcompat.widget.LinearLayoutCompat>

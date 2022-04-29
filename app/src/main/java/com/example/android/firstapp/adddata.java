@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class adddata extends AppCompatActivity
 {
-   EditText name,course,email,purl;
+   EditText name,departement,email;
    Button submit,back;
 
     @Override
@@ -31,8 +31,7 @@ public class adddata extends AppCompatActivity
 
         name=(EditText)findViewById(R.id.add_name);
         email=(EditText)findViewById(R.id.add_email);
-        course=(EditText)findViewById(R.id.add_course);
-        purl=(EditText)findViewById(R.id.add_purl);
+        departement=(EditText)findViewById(R.id.add_departement);
 
         back=(Button)findViewById(R.id.add_back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -56,26 +55,24 @@ public class adddata extends AppCompatActivity
     {
         Map<String,Object> map=new HashMap<>();
         map.put("name",name.getText().toString());
-        map.put("course",course.getText().toString());
+        map.put("departement",departement.getText().toString());
         map.put("email",email.getText().toString());
-        map.put("purl",purl.getText().toString());
-        FirebaseDatabase.getInstance().getReference().child("students").push()
+        FirebaseDatabase.getInstance().getReference().child("professeurs").push()
                 .setValue(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                        name.setText("");
-                       course.setText("");
+                       departement.setText("");
                        email.setText("");
-                       purl.setText("");
-                        Toast.makeText(getApplicationContext(),"Inserted Successfully",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Ajout réussit",Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e)
                     {
-                        Toast.makeText(getApplicationContext(),"Could not insert",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Echec d'ajout",Toast.LENGTH_LONG).show();
                     }
                 });
 

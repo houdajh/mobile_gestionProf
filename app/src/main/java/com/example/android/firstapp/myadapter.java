@@ -1,5 +1,6 @@
 package com.example.android.firstapp;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
@@ -37,12 +38,12 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final myviewholder holder, final int position, @NonNull final model model)
+    protected void onBindViewHolder(@NonNull final myviewholder holder, @SuppressLint("RecyclerView") final int position, @NonNull final model model)
     {
        holder.name.setText(model.getName());
-       holder.course.setText(model.getCourse());
+       holder.departement.setText(model.getDepartement());
        holder.email.setText(model.getEmail());
-       Glide.with(holder.img.getContext()).load(model.getPurl()).into(holder.img);
+
 
                     holder.edit.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -53,15 +54,14 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
                                     .create();
 
                             View myview=dialogPlus.getHolderView();
-                            final EditText purl=myview.findViewById(R.id.uimgurl);
                             final EditText name=myview.findViewById(R.id.uname);
-                            final EditText course=myview.findViewById(R.id.ucourse);
+                            final EditText departement=myview.findViewById(R.id.udepartement);
                             final EditText email=myview.findViewById(R.id.uemail);
                             Button submit=myview.findViewById(R.id.usubmit);
 
-                            purl.setText(model.getPurl());
+
                             name.setText(model.getName());
-                            course.setText(model.getCourse());
+                            departement.setText(model.getDepartement());
                             email.setText(model.getEmail());
 
                             dialogPlus.show();
@@ -70,12 +70,11 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
                                     @Override
                                     public void onClick(View view) {
                                         Map<String,Object> map=new HashMap<>();
-                                        map.put("purl",purl.getText().toString());
                                         map.put("name",name.getText().toString());
                                         map.put("email",email.getText().toString());
-                                        map.put("course",course.getText().toString());
+                                        map.put("departement",departement.getText().toString());
 
-                                        FirebaseDatabase.getInstance().getReference().child("students")
+                                        FirebaseDatabase.getInstance().getReference().child("professeurs")
                                                 .child(getRef(position).getKey()).updateChildren(map)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
@@ -101,18 +100,18 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
                         @Override
                         public void onClick(View view) {
                             AlertDialog.Builder builder=new AlertDialog.Builder(holder.img.getContext());
-                            builder.setTitle("Delete Panel");
-                            builder.setMessage("Delete...?");
+                            builder.setTitle("Suppression");
+                            builder.setMessage("Voulez vous effectuez cette suppression ?");
 
-                            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    FirebaseDatabase.getInstance().getReference().child("students")
+                                    FirebaseDatabase.getInstance().getReference().child("professeurs")
                                             .child(getRef(position).getKey()).removeValue();
                                 }
                             });
 
-                            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -138,13 +137,13 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
     {
         CircleImageView img;
         ImageView edit,delete;
-        TextView name,course,email;
+        TextView name,departement,email;
         public myviewholder(@NonNull View itemView)
         {
             super(itemView);
             img=(CircleImageView) itemView.findViewById(R.id.img1);
             name=(TextView)itemView.findViewById(R.id.nametext);
-            course=(TextView)itemView.findViewById(R.id.coursetext);
+            departement=(TextView)itemView.findViewById(R.id.departementtext);
             email=(TextView)itemView.findViewById(R.id.emailtext);
 
             edit=(ImageView)itemView.findViewById(R.id.editicon);

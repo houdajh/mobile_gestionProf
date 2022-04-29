@@ -2,16 +2,16 @@ package com.example.android.firstapp;
 
 public class model
 {
-  String name,course,email,purl;
+  String name,departement,email;
     model()
     {
 
     }
-    public model(String name, String course, String email, String purl) {
+    public model(String name, String departement, String email) {
         this.name = name;
-        this.course = course;
+        this.departement = departement;
         this.email = email;
-        this.purl = purl;
+
     }
 
     public String getName() {
@@ -22,12 +22,12 @@ public class model
         this.name = name;
     }
 
-    public String getCourse() {
-        return course;
+    public String getDepartement() {
+        return departement;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setDepartement(String departement) {
+        this.departement = departement;
     }
 
     public String getEmail() {
@@ -38,11 +38,5 @@ public class model
         this.email = email;
     }
 
-    public String getPurl() {
-        return purl;
-    }
 
-    public void setPurl(String purl) {
-        this.purl = purl;
-    }
 }
